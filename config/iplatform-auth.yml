@@ -1,0 +1,75 @@
+server:
+  port: 8771
+spring:
+  redis:
+    host: 192.168.12.121
+    port: 6379
+    password: asd@123
+    timeout: 10s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    password: SPSS_MODEL
+    url: jdbc:oracle:thin:@192.168.12.119:1522:ORCL10G
+    username: SPSS_MODEL
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-test-query: SELECT 1 FROM DUAL
+#===日志采集  注释掉则不采集日志
+  rabbitmq:
+    host: 192.168.12.118
+    port: 5672
+    username: boco-cloud
+    password: boco-cloud
+    virtual-host: /
+  mvc:
+    servlet:
+      load-on-startup: 1
+#===链路追踪配置     如未启动不影响使用
+  zipkin:
+    base-url: http://192.168.12.122:9411
+    sleuth:
+      sampler:
+        percentage: 1
+    sender:
+      type: web
+access_token:
+  store-jwt: false
+  add-userinfo: false
+#===security 工建项目用户系统  privilege 统计分析平台用户系统
+user:
+  center:
+    address: privilege
+logging:
+  level:
+    root: info
+    com.cloud: debug
+  file: logs/${spring.application.name}.log
+#==ribbon+hystrix 一起设置才可设置feigen超时时间
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
