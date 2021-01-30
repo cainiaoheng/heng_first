@@ -1,21 +1,2 @@
-spring: 
-  datasource:
-    dbcp2:
-      test-on-return: false
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    password: SPSS_MODEL
-    url: jdbc:oracle:thin:@192.168.12.119:1522:ORCL10G
-    username: SPSS_MODEL    
-    
-mybatis:
-  configuration:
-    aggressive-lazy-loading: 'false'
-    cache-enabled: 'true'
-    default-executor-type: REUSE
-    default-statement-timeout: 25000
-    lazy-loading-enabled: 'false'
-    multiple-result-sets-enabled: 'true'
-  mapper-locations: classpath:mybatis/*.xml 
-
 util:
   num: zhangsan11111111
