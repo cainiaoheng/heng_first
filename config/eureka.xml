@@ -1,0 +1,12 @@
+eureka: 
+  client:
+    service-url: 
+      defaultZone: http://192.168.12.106:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true # 是否需要检索其他微服务，这里必须为false，否则找不到config服务
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
